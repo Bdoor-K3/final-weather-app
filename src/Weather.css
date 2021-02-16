@@ -3,17 +3,15 @@
   color: grey;
   border: 2px solid #ffd5cd;
   border-radius: 5px;
-  max-width: 700px;
-  margin: 30px;
+  max-width: 550px;
   padding: 15px;
   font-family: "Oxygen", sans-serif;
 }
 
 .Weather h1 {
-  font-family: "Oxygen", sans-serif;
-  margin-top: 5px;
+  margin-top: 10px;
   font-size: 48px;
-  color: #1a1c20;
+  color: grey;
   font-weight: 700;
 }
 
@@ -24,7 +22,21 @@
 }
 
 .Weather li {
-  font-family: "Oxygen", sans-serif;
   list-style: none;
   font-weight: 400;
+}
+
+.Weather .temperature {
+  font-size: 54px;
+  line-height: 64px;
+  color: #2b2d2f;
+}
+
+.Weather .unit {
+  font-size: 24px;
+  line-height: 64px;
+  position: relative;
+  top: -22px;
+  margin-left: 5px;
+  color: #2b2d2f;
 }
