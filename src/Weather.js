@@ -1,22 +1,18 @@
-import React from "react";
 import "./Weather.css";
 import axios from "axios";
+import React, { useState } from "react";
 
 export  default function Weather (){
-    const apiKey="29a44231d6c7563fcc1740ef29d751ed";
-    let city = "Geneva"
-    let apiUrl= `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    
+    const[ready, setReady] = useState(false);
+    const[temperature, setTemperature] = useState(null);
     function handleResponse(response){
-        console.log(response.data);
+        setTemperature(response.data);
+        setReady(true);
     }
-    axios.get(apiUrl).then(handleResponse);
-
-
-
-    return (
+    
+if (ready){
+return (
     <div className="Weather">
-        
         <form>
             <div className="row">
                 <div className="col-9">
@@ -38,7 +34,7 @@ export  default function Weather (){
                 <div className="clearfix">
                 <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="Partly Sunny" className="float-left"/>
                 <div className="float-left">
-                <span className="temperature">7</span>
+                <span className="temperature">{temperature}</span>
                 <span className="unit">°C</span>
                 </div>
                 </div>
@@ -53,4 +49,13 @@ export  default function Weather (){
             </div>
        </div>
       );
+} else{
+    const apiKey="29a44231d6c7563fcc1740ef29d751ed";
+    let city = "San Francisco";
+    let apiUrl= `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+    
+    return "Searching...";
+}
+    
 }
