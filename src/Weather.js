@@ -6,6 +6,7 @@ import WeatherInfo from "./WeatherInfo";
 
 export  default function Weather (props){
     const[weatherData, setWeatherData] = useState({ready:false});
+    const[city, setCity] = useState(props.defaultCity);
 
     function handleResponse(response){
         console.log(response.data);
@@ -21,13 +22,22 @@ export  default function Weather (props){
         });
     }
     
+    function handleSubmit(event){
+        event.preventDefeault();
+        alert("Hello");
+    }
+
+    function handleCityChange(event){
+        setCity(event.target.value);
+    }
+
 if (weatherData.ready){
 return (
     <div className="Weather">
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className="row">
                 <div className="col-9">
-            <input type="search" placeholder="Search city here" className="form-control" autoFocus="on"/>
+            <input type="search" placeholder="Search city here" className="form-control" autoFocus="on" onChange={handleCityChange}/>
             </div>
             <div className="col-3">
             <input type="submit" value="Search" className="btn btn-primary w-100"/>
@@ -39,7 +49,7 @@ return (
       );
 } else{
     const apiKey="29a44231d6c7563fcc1740ef29d751ed";
-    let apiUrl= `http://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
+    let apiUrl= `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
     
     return "Searching...";
