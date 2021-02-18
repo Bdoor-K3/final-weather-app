@@ -43,4 +43,6 @@
 
 .Weather canvas {
   margin-right: 10px;
+  display: block;
+  max-width: 50px;
 }
