@@ -16,15 +16,23 @@ export  default function Weather (props){
             date: new Date(response.data.dt*1000),
             description: response.data.weather[0].description,
             humidity: response.data.main.humidity,
-            iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
+            iconUrl: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
             wind: response.data.wind.speed,
             city: response.data.name
         });
     }
-    
+     
+    function searchCity(){
+    const apiKey="29a44231d6c7563fcc1740ef29d751ed";
+    let apiUrl= `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+    }
+
+
+
     function handleSubmit(event){
-        event.preventDefeault();
-        alert("Hello");
+        event.preventDefault();
+        searchCity();
     }
 
     function handleCityChange(event){
@@ -48,10 +56,7 @@ return (
     </div>
       );
 } else{
-    const apiKey="29a44231d6c7563fcc1740ef29d751ed";
-    let apiUrl= `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
-    
+    searchCity();
     return "Searching...";
 }
     
