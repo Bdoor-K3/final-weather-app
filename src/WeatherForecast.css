@@ -1,9 +1,11 @@
 .WeatherForecast {
   text-align: center;
   margin-top: 30px;
+  color: #d33b87;
 }
 
 .WeatherForecast canvas {
   display: block;
   margin: 0 auto;
+  padding: 20% 0%;
 }
